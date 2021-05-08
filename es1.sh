@@ -12,12 +12,14 @@ path.data: /var/lib/elasticsearch
 path.logs: /var/log/elasticsearch
 network.host: 0.0.0.0
 http.port: 9200
-discovery.seed_hosts: ["172.31.30.164", "172.31.26.248", "172.31.25.63"]
-cluster.initial_master_nodes: ["172.31.30.164"]
+discovery.seed_hosts: ["10.0.0.165", "10.0.1.84", "10.0.2.40"]
+cluster.initial_master_nodes: ["10.0.0.165"]
 
 
-#######################################" > /etc/elasticsearch/elasticsearch.yml
+#######################################
+" > /etc/elasticsearch/elasticsearch.yml
 service elasticsearch start
 iptables -A INPUT -p tcp -s localhost --dport 9200 -j ACCEPT
 iptables -A INPUT -p tcp -s 172.31.0.0/16 --dport 9200 -j ACCEPT
+iptables -A INPUT -p tcp -s 10.0.0.0/16 --dport 9200 -j ACCEPT
 iptables -A INPUT -p tcp --dport 9200 -j DROP
